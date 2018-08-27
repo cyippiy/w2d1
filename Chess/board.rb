@@ -1,5 +1,6 @@
 require_relative 'piece.rb'
-
+require 'colorize'
+require 'pp'
 
 class Board
   
@@ -24,10 +25,17 @@ class Board
     @rows[0][6] = Knight.new()
     @rows[7][1] = Knight.new()
     @rows[7][6] = Knight.new()
-    # @rows[0][1] = Bishop.new()
-    # @rows[0][6] = Bishop.new()
-    # @rows[7][1] = Bishop.new()
-    # @rows[7][6] = Bishop.new()
+    @rows[0][2] = Bishop.new()
+    @rows[0][5] = Bishop.new()
+    @rows[7][2] = Bishop.new()
+    @rows[7][5] = Bishop.new()
+    @rows[0][4] = King.new()
+    @rows[7][4] = King.new()
+    
+    (0...8).each do |i|
+      @rows[1][i] = Pawn.new()
+      @rows[6][i] = Pawn.new()
+    end
   end
   
   def [](pos)
@@ -61,3 +69,9 @@ class Board
   
 end
 
+if __FILE__ == $PROGRAM_NAME
+  board = Board.new
+  pp board.rows
+  board.move_piece(nil, [1,1], [3,1])
+  pp board.rows
+end

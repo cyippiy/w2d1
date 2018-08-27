@@ -1,7 +1,5 @@
 class Piece
-  def inspect
-    "P"
-  end
+  
 end
 
 class NullPiece < Piece
@@ -10,18 +8,36 @@ end
 
 class Queen < Piece
   def inspect
-    "Q"
+    "Que"
   end
 end
 
 class Rook < Piece
   def inspect
-    "R"
+    "Roo"
   end
 end
 
 class Knight < Piece
   def inspect
-    "K"
+    "Kni"
+  end
+end
+
+class Bishop < Piece
+  def inspect
+    "Bis"
+  end
+end
+
+class King < Piece
+  def inspect
+    "Kin"
+  end
+end
+
+class Pawn < Piece
+  def inspect
+    "Paw"
   end
 end

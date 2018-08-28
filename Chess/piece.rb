@@ -1,3 +1,4 @@
+require 'colorize'
 class Piece
   
 end

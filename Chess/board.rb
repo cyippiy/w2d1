@@ -1,5 +1,4 @@
 require_relative 'piece.rb'
-require 'colorize'
 require 'pp'
 
 class Board
@@ -58,11 +57,18 @@ class Board
   end
   
   def valid_pos?(pos)
-    
+    x,y = pos
+    range = (0..7)
+    return false unless range.include?(x) and range.include?(y) 
+    return true
   end
   
   def add_piece(piece,pos)
     
+  end
+  
+  def inspect
+    self.rows
   end
   
   

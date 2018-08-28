@@ -75,9 +75,52 @@ class Cursor
     return input
   end
 
+  # " " => :space,
+  # "h" => :left,
+  # "j" => :down,
+  # "k" => :up,
+  # "l" => :right,
+  # "w" => :up,
+  # "a" => :left,
+  # "s" => :down,
+  # "d" => :right,
+  # "\t" => :tab,
+  # "\r" => :return,
+  # "\n" => :newline,
+  # "\e" => :escape,
+  # "\e[A" => :up,
+  # "\e[B" => :down,
+  # "\e[C" => :right,
+  # "\e[D" => :left,
+  # "\177" => :backspace,
+  # "\004" => :delete,
+  # "\u0003" => :ctrl_c,
   def handle_key(key)
+    case key
+    when :space, :return
+      return self.cursor_pos
+    when :up
+      self.update_pos(MOVES[up])
+      return nil
+    when :down
+      self.update_pos(MOVES[down])
+      return nil
+    when :left
+      self.update_pos(MOVES[left])
+      return nil
+    when :right
+      self.update_pos(MOVES[right])
+      return nil
+    when :ctrl_c
+      Process.exit(0)
+    end
+      
   end
 
   def update_pos(diff)
+    new_pos = [self.cursor_pos[0]+diff[0], self.cursor_pos[1]+diff[1]]
+    if self.board.valid_pos?(new_pos)
+      self.cursor_pos = new_pos
+    end
   end
 end

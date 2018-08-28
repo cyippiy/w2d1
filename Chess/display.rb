@@ -13,12 +13,16 @@ class Display
   
   def render
     while true
-      self.board.rows.each do |row|
-        str = []
-        row.each do |square|
-          str << square
+      system("clear")
+      self.board.rows.each_with_index do |row, i|
+        row.each_with_index do |square, j|
+          piece = square.to_s
+          if @cursor.selected && @cursor.cursor_pos == [i,j]
+            piece = piece.colorize(:blue)
+          end
+          print piece + " "
         end
-        p str
+        puts ""
       end
       @cursor.get_input
     end

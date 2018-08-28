@@ -8,37 +8,37 @@ class NullPiece < Piece
 end
 
 class Queen < Piece
-  def inspect
+  def to_s
     "Que"
   end
 end
 
 class Rook < Piece
-  def inspect
+  def to_s
     "Roo"
   end
 end
 
 class Knight < Piece
-  def inspect
+  def to_s
     "Kni"
   end
 end
 
 class Bishop < Piece
-  def inspect
+  def to_s
     "Bis"
   end
 end
 
 class King < Piece
-  def inspect
+  def to_s
     "Kin"
   end
 end
 
 class Pawn < Piece
-  def inspect
+  def to_s
     "Paw"
   end
 end

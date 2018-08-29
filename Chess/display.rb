@@ -16,35 +16,33 @@ class Display
   def render
     while true
       begin
-      # system("clear")
-      self.board.rows.each_with_index do |row, i|
-        row.each_with_index do |square, j|
-          piece = square.symbol
-          if square.color == :W
-            piece = piece.colorize(:white)
-          elsif square.color == :B
-            piece = piece.colorize(:background=>:yellow, :color=>:black)
-          else
-            piece = piece.colorize(:background=>:white)
+        system("clear")
+        self.board.rows.each_with_index do |row, i|
+          row.each_with_index do |square, j|
+            piece = square.symbol
+            if square.color == :W
+              piece = piece.colorize(:white)
+            elsif square.color == :B
+              piece = piece.colorize(:background=>:yellow, :color=>:black)
+            else
+              piece = piece.colorize(:background=>:white)
+            end
+            if @cursor.cursor_pos == [i,j]
+              piece = piece.colorize(:background => :red)
+            end
+            if @cursor.selected && self.selected_piece == [i,j]
+              piece = piece.colorize(:background => :blue)
+            end
+            print piece + " "
           end
-          if @cursor.cursor_pos == [i,j]
-            piece = piece.colorize(:background => :red)
-          end
-          if @cursor.selected && self.selected_piece == [i,j]
-            piece = piece.colorize(:background => :blue)
-          end
-          print piece + " "
+          puts " "
         end
-        puts " "
-      end
-      new_input = @cursor.get_input
-      self.selected_piece = new_input  if new_input != nil && @cursor.selected
-      if !@cursor.selected && self.selected_piece != nil
-        board.move_piece(:B,self.selected_piece,@cursor.cursor_pos)
-        self.selected_piece = nil 
-      end
-      p board.in_check?(:B)
-      p board.in_check?(:W)
+        new_input = @cursor.get_input
+        self.selected_piece = new_input  if new_input != nil && @cursor.selected
+        if !@cursor.selected && self.selected_piece != nil
+          board.move_piece(:B,self.selected_piece,@cursor.cursor_pos)
+          self.selected_piece = nil 
+        end
       rescue
         retry
       end

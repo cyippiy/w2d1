@@ -220,8 +220,8 @@ class Pawn < Piece
   def valid_moves
     moves = []
     forward_steps.each {|y| moves << [y+self.pos[0], self.pos[1]]}
-    p side_attacks
-    return moves + side_attacks
+    moves += side_attacks
+    moves.select {|move| board.valid_pos?(move)}
   end
   
   private

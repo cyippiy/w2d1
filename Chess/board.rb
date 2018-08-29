@@ -101,7 +101,9 @@ class Board
     king_pos = find_king(color)
     (0..7).each do |i|
       (0..7).each do |j|
-        return true if self[[i,j]].color != color && self.valid_moves.include?(king_pos)
+        return true if !self[[i,j]].is_a?(NullPiece) && 
+                        self[[i,j]].color != color && 
+                        self[[i,j]].valid_moves.include?(king_pos)
       end
     end
     return false
@@ -110,6 +112,14 @@ class Board
   
   def checkmate?(color)
     
+    king_pos = find_king(color)
+    (0..7).each do |i|
+      (0..7).each do |j|
+        if !self[[i,j]].is_a?(NullPiece) && self[[i,j]].color == color
+          try_these = self[[i,j]].valid_moves
+        end
+      end
+    end
   end
   
 end
